@@ -40,6 +40,7 @@ async function onFormSubmit(event) {
             initLightbox();
             refs.loadMoreBtn.style.display = "flex";
         } else {
+            refs.loadMoreBtn.style.display = "none";
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again');
         }
     }
@@ -55,6 +56,7 @@ async function getImage(query) {
                 console.log(data.hits);
                 return data;
             } else {
+                refs.loadMoreBtn.style.display = "none";
                 Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again');
                 throw new Error('No images found');
             }
