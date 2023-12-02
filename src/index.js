@@ -25,8 +25,9 @@ refs.formEl.addEventListener("submit", onFormSubmit);
 refs.loadMoreBtn.addEventListener("click", onLoadMore);
 
 async function onFormSubmit(event) {
-    page = 1;
-    event.preventDefault();
+     event.preventDefault();
+     page = 1;
+   
      queryValue = refs.inputEl.value;
     try {
          refs.loadMoreBtn.style.display = "none";
@@ -74,7 +75,7 @@ async function getImage(query) {
 async function onLoadMore() {
     page += 1;
 
-    if (page * per_page >= curretnHits) {
+    if (page === Math.ceil(curretnHits / per_page)) {
         refs.loadMoreBtn.style.display = "none";
         Notiflix.Notify.failure('We are sorry, but you have reached the end of search results');
         return;
@@ -90,7 +91,7 @@ async function onLoadMore() {
         console.log(error.message);
     }
 }
-       
+ 
     function createGalleryMarkup(arr) {
     return arr.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads
     }) =>
