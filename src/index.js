@@ -75,11 +75,7 @@ async function getImage(query) {
 async function onLoadMore() {
     page += 1;
 
-    if (page === Math.ceil(curretnHits / per_page)) {
-        refs.loadMoreBtn.style.display = "none";
-        Notiflix.Notify.failure('We are sorry, but you have reached the end of search results');
-        return;
-    }
+    
 
     refs.loadMoreBtn.style.display = "flex";
     
@@ -87,6 +83,11 @@ async function onLoadMore() {
         const dataLoadMore = await getImage(queryValue);
         refs.gallery.insertAdjacentHTML("beforeend", createGalleryMarkup(dataLoadMore.hits));
         initLightbox(); 
+        if (page === Math.ceil(curretnHits / per_page)) {
+        refs.loadMoreBtn.style.display = "none";
+        Notiflix.Notify.failure('We are sorry, but you have reached the end of search results');
+        return;
+    }
     } catch (error) {
         console.log(error.message);
     }
